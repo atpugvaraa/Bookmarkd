@@ -5,32 +5,36 @@
 //  Created by Aarav Gupta on 10/06/26.
 //
 
-import SwiftUI
 import Aesthetics
 import ComposableArchitecture
+import SwiftUI
 
+@ViewAction(for: ShelfFeature.self)
 struct ShelfView: View {
     @Bindable var store: StoreOf<ShelfFeature>
     @State private var scrollOffset: CGFloat = 0
-    
+
     var body: some View {
-        let isDetail = store.selectedBook != nil
-        
-        NavigationBarView(
-            title: isDetail ? (store.selectedBook?.book.title ?? "Details") : "Your Shelf",
-            titleColor: .highlight,
-            scrollOffset: $scrollOffset,
-            backAction: isDetail ? { store.send(.detailDismissed) } : nil,
-            backgroundColor: .accent
-        ) {
-            filterBar
-        } content: {
-            content
+        NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+            NavigationBarView(
+                title: "Your Shelf",
+                titleColor: .highlight,
+                scrollOffset: $scrollOffset,
+                backgroundColor: .accent
+            ) {
+                filterBar
+            } content: {
+                content
+            }
+        } destination: { store in
+            switch store.case {
+            case let .bookDetail(store):
+                BookDetailView(store: store)
+            }
         }
-        .onAppear { store.send(.onAppear) }
     }
-    
-    var content: some View {
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 20) {
             if store.filteredEntries.isEmpty {
                 emptyState
@@ -38,38 +42,24 @@ struct ShelfView: View {
                 shelfGrid
             }
         }
-        .navigationDestination(
-            item: Binding(
-                get: { store.selectedBook },
-                set: { _ in store.send(.detailDismissed) }
-            )
-        ) { _ in
-            if let detailStore = store.scope(
-                state: \.selectedBook,
-                action: \.bookDetail
-            ) {
-                BookDetailView(store: detailStore)
-                    .navigationBarBackButtonHidden(true)
-            }
-        }
     }
-    
+
     private var filterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 filterChip(label: "All", isSelected: store.selectedFilter == nil) {
-                    store.send(.filterChanged(nil))
+                    send(.filterChanged(nil))
                 }
                 ForEach(ShelfStatus.allCases, id: \.self) { status in
                     filterChip(label: status.rawValue, isSelected: store.selectedFilter == status) {
-                        store.send(.filterChanged(status))
+                        send(.filterChanged(status))
                     }
                 }
             }
             .padding(.horizontal, 16)
         }
     }
-    
+
     private func filterChip(label: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(label)
@@ -82,7 +72,7 @@ struct ShelfView: View {
                 .clipShape(Capsule())
         }
     }
-    
+
     private var shelfGrid: some View {
         LazyVGrid(
             columns: [
@@ -93,7 +83,7 @@ struct ShelfView: View {
         ) {
             ForEach(store.filteredEntries) { entry in
                 Button {
-                    store.send(.bookTapped(entry.book))
+                    send(.bookTapped(entry.book))
                 } label: {
                     BookCard(book: entry.book)
                 }
@@ -101,7 +91,7 @@ struct ShelfView: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     private var emptyState: some View {
         VStack(spacing: 12) {
             Image(systemName: "books.vertical.fill")

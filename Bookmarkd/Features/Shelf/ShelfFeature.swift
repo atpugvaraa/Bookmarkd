@@ -5,69 +5,47 @@
 //  Created by Aarav Gupta on 10/06/26.
 //
 
-import SwiftUI
 import ComposableArchitecture
 
-struct ShelfFeature: Reducer {
+@Reducer
+struct ShelfFeature {
     @ObservableState
     struct State: Equatable {
-        var entries: [ShelfEntry] = []
+        @Shared(.shelf) var shelf
         var selectedFilter: ShelfStatus?
-        var selectedBook: BookDetailFeature.State?
-        
+        var path = StackState<BookRoute.State>()
+
         var filteredEntries: [ShelfEntry] {
-            guard let filter = selectedFilter else { return entries }
-            return entries.filter { $0.status == filter }
+            let sorted = shelf.sorted { $0.dateUpdated > $1.dateUpdated }
+            guard let filter = selectedFilter else { return sorted }
+            return sorted.filter { $0.status == filter }
         }
     }
-    
-    @CasePathable
-    enum Action: Sendable {
-        case onAppear
-        case entriesLoaded([ShelfEntry])
-        case filterChanged(ShelfStatus?)
-        case bookTapped(Book)
-        case bookDetail(BookDetailFeature.Action)
-        case detailDismissed
+
+    enum Action: ViewAction {
+        enum View {
+            case filterChanged(ShelfStatus?)
+            case bookTapped(Book)
+        }
+        case view(View)
+        case path(StackActionOf<BookRoute>)
     }
-    
-    @Dependency(\.shelfClient) var shelfClient
-    
+
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .onAppear:
-                return .run { send in
-                    let entries = await shelfClient.loadAll()
-                    await send(.entriesLoaded(entries))
-                }
-                
-            case let .entriesLoaded(entries):
-                state.entries = entries.sorted { $0.dateUpdated > $1.dateUpdated }
-                return .none
-                
-            case let .filterChanged(filter):
+            case let .view(.filterChanged(filter)):
                 state.selectedFilter = filter
                 return .none
-                
-            case let .bookTapped(book):
-                state.selectedBook = BookDetailFeature.State(book: book)
+
+            case let .view(.bookTapped(book)):
+                state.path.append(.bookDetail(BookDetailFeature.State(book: book)))
                 return .none
-                
-            case .bookDetail:
+
+            case .path:
                 return .none
-                
-            case .detailDismissed:
-                state.selectedBook = nil
-                // reload in case status changed
-                return .run { send in
-                    let entries = await shelfClient.loadAll()
-                    await send(.entriesLoaded(entries))
-                }
             }
         }
-        .ifLet(\.selectedBook, action: \.bookDetail) {
-            BookDetailFeature()
-        }
+        .forEach(\.path, action: \.path)
     }
 }

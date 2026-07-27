@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct ShelfEntry: Identifiable, Equatable, Codable, Sendable {
+// nonisolated: the target defaults to MainActor isolation, but shared file storage
+// needs these conformances to be usable off the main actor.
+nonisolated struct ShelfEntry: Identifiable, Equatable, Codable, Sendable {
     let id: String          // same as book.id, so one book = one entry
     var book: Book
     var status: ShelfStatus
@@ -16,13 +18,14 @@ struct ShelfEntry: Identifiable, Equatable, Codable, Sendable {
     var dateAdded: Date
     var dateUpdated: Date
     
-    init(book: Book, status: ShelfStatus) {
+    /// - Parameter now: injected rather than read from the clock so shelf edits are testable.
+    init(book: Book, status: ShelfStatus, now: Date) {
         self.id = book.id
         self.book = book
         self.status = status
         self.currentPage = nil
         self.totalPages = nil
-        self.dateAdded = Date()
-        self.dateUpdated = Date()
+        self.dateAdded = now
+        self.dateUpdated = now
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ShelfStatus: String, CaseIterable, Codable, Sendable {
+nonisolated enum ShelfStatus: String, CaseIterable, Codable, Sendable {
     case reading = "Reading"
     case completed = "Completed"
     case onHold = "On Hold"

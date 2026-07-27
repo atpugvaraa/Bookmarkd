@@ -12,38 +12,30 @@
 		77EB62282FD891DB006C91DF /* Aesthetics in Frameworks */ = {isa = PBXBuildFile; productRef = 77EB62272FD891DB006C91DF /* Aesthetics */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		77A0000B2FE000000000000B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77572FC32FD85CA500AD56DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77572FCA2FD85CA500AD56DB;
+			remoteInfo = Bookmarkd;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		77572FCB2FD85CA500AD56DB /* Bookmarkd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookmarkd.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A000092FE0000000000009 /* BookmarkdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookmarkdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7718F3CA2FD91D1E00538F4D /* Exceptions for "Bookmarkd" folder in "Bookmarkd" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Extensions/NavigationBarStyle+bookmarkd.swift",
-			);
-			target = 77572FCA2FD85CA500AD56DB /* Bookmarkd */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		7718F3CB2FD91D1E00538F4D /* Exceptions for "Bookmarkd" folder in "Copy Bundle Resources" phase from "Bookmarkd" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 77572FC92FD85CA500AD56DB /* Resources */;
-			membershipExceptions = (
-				"Extensions/NavigationBarStyle+bookmarkd.swift",
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		77572FCD2FD85CA500AD56DB /* Bookmarkd */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7718F3CA2FD91D1E00538F4D /* Exceptions for "Bookmarkd" folder in "Bookmarkd" target */,
-				7718F3CB2FD91D1E00538F4D /* Exceptions for "Bookmarkd" folder in "Copy Bundle Resources" phase from "Bookmarkd" target */,
-			);
 			path = Bookmarkd;
+			sourceTree = "<group>";
+		};
+		77A000082FE0000000000008 /* BookmarkdTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BookmarkdTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -57,6 +49,11 @@
 				77EB62282FD891DB006C91DF /* Aesthetics in Frameworks */,
 			);
 		};
+		77A000062FE0000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -64,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				77572FCD2FD85CA500AD56DB /* Bookmarkd */,
+				77A000082FE0000000000008 /* BookmarkdTests */,
 				77572FCC2FD85CA500AD56DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				77572FCB2FD85CA500AD56DB /* Bookmarkd.app */,
+				77A000092FE0000000000009 /* BookmarkdTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +101,27 @@
 			productReference = 77572FCB2FD85CA500AD56DB /* Bookmarkd.app */;
 			productType = "com.apple.product-type.application";
 		};
+		77A000012FE0000000000001 /* BookmarkdTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77A000022FE0000000000002 /* Build configuration list for PBXNativeTarget "BookmarkdTests" */;
+			buildPhases = (
+				77A000052FE0000000000005 /* Sources */,
+				77A000062FE0000000000006 /* Frameworks */,
+				77A000072FE0000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				77A0000A2FE000000000000A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				77A000082FE0000000000008 /* BookmarkdTests */,
+			);
+			name = BookmarkdTests;
+			productName = BookmarkdTests;
+			productReference = 77A000092FE0000000000009 /* BookmarkdTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -114,6 +134,10 @@
 				TargetAttributes = {
 					77572FCA2FD85CA500AD56DB = {
 						CreatedOnToolsVersion = 27.0;
+					};
+					77A000012FE0000000000001 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 77572FCA2FD85CA500AD56DB;
 					};
 				};
 			};
@@ -137,12 +161,18 @@
 			projectRoot = "";
 			targets = (
 				77572FCA2FD85CA500AD56DB /* Bookmarkd */,
+				77A000012FE0000000000001 /* BookmarkdTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		77572FC92FD85CA500AD56DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		77A000072FE0000000000007 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -155,7 +185,20 @@
 			files = (
 			);
 		};
+		77A000052FE0000000000005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		77A0000A2FE000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77572FCA2FD85CA500AD56DB /* Bookmarkd */;
+			targetProxy = 77A0000B2FE000000000000B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		77572FD42FD85CA700AD56DB /* Debug configuration for PBXProject "Bookmarkd" */ = {
@@ -349,6 +392,50 @@
 			};
 			name = Release;
 		};
+		77A000032FE0000000000003 /* Debug configuration for PBXNativeTarget "BookmarkdTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3YK32DPS3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = aaravgupta.BookmarkdTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookmarkd.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bookmarkd";
+			};
+			name = Debug;
+		};
+		77A000042FE0000000000004 /* Release configuration for PBXNativeTarget "BookmarkdTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3YK32DPS3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = aaravgupta.BookmarkdTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookmarkd.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bookmarkd";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -365,6 +452,14 @@
 			buildConfigurations = (
 				77572FD72FD85CA700AD56DB /* Debug configuration for PBXNativeTarget "Bookmarkd" */,
 				77572FD82FD85CA700AD56DB /* Release configuration for PBXNativeTarget "Bookmarkd" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		77A000022FE0000000000002 /* Build configuration list for PBXNativeTarget "BookmarkdTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77A000032FE0000000000003 /* Debug configuration for PBXNativeTarget "BookmarkdTests" */,
+				77A000042FE0000000000004 /* Release configuration for PBXNativeTarget "BookmarkdTests" */,
 			);
 			defaultConfigurationName = Release;
 		};
